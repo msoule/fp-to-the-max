@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:9.6.10
+    command: postgres -c config_file=/etc/postgresql.conf
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: tcscala
+      PGDATA: /var/lib/postgresql/data/local1
+    ports:
+      - 15432:5432
+    expose:
+      - 5432
+    volumes:
+      - ./conf/postgresql.conf:/etc/postgresql.conf
+    networks:
+      - back
+networks:
+  back:
+    driver: bridge
